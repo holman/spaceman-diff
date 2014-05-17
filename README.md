@@ -2,7 +2,7 @@
 
 ## diff images from the command line
 
-![https://cloud.githubusercontent.com/assets/2723/3005174/e28c2e00-ddd1-11e3-9dd8-c2c150e0ac86.jpg]()
+![](https://cloud.githubusercontent.com/assets/2723/3005174/e28c2e00-ddd1-11e3-9dd8-c2c150e0ac86.jpg)
 
 ## install
 
