@@ -19,8 +19,8 @@ fileB=$5
 
 case "$extension" in
   "jpg"|"jpeg"|"gif"|"png")
-    outputA=`jp2a $fileA --color --width=$perDiffWidth`
-    outputB=`jp2a $fileB --color --width=$perDiffWidth`
+    outputA=`convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -`
+    outputB=`convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -`
 
     lengthA=`echo "$outputA" | wc -l | xargs`
     lengthB=`echo "$outputB" | wc -l | xargs`
