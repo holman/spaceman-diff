@@ -26,6 +26,10 @@ case "$extension" in
     lengthB=`echo "$outputB" | wc -l | xargs`
     max=`echo "$lengthA\n$lengthB" | sort -nr | head -n1`
 
+    sizeA=$(ls -lh $fileA | cut -d" " -f9)
+    sizeB=$(ls -lh $fileB | cut -d" " -f9)
+    echo "Filesize A: $sizeA, Filesize B: $sizeB"
+
     for (( i=1; i<=$max; i++ ))
     do
       A=$(echo "$outputA" | sed -n ${i}p)
