@@ -24,7 +24,7 @@ case "$extension" in
 
     lengthA=`echo "$outputA" | wc -l | xargs`
     lengthB=`echo "$outputB" | wc -l | xargs`
-    max=`echo "$lengthA\n$lengthB" | sort -r | head -n1`
+    max=`echo "$lengthA\n$lengthB" | sort -nr | head -n1`
 
     for (( i=1; i<=$max; i++ ))
     do
