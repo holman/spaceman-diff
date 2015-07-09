@@ -11,7 +11,7 @@ filename=`basename $1`
 extension=${filename##*.}
 
 screenWidth=$(stty size | cut -d " " -f2)
-screenWidthMinusBuffer=$(expr $screenWidth - 10)
+screenWidthMinusBuffer=$(expr $screenWidth - 4)
 perDiffWidth=$(expr $screenWidthMinusBuffer / 2)
 
 fileA=$2
@@ -39,7 +39,7 @@ case "$extension" in
         B=$(yes " " | head -n$perDiffWidth | tr -d '\n')
       fi
 
-      echo "$A" + "    " + "$B"
+      echo "$A""    ""$B"
     done
   ;;
   *)
