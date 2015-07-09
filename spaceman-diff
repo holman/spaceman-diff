@@ -39,7 +39,7 @@ case "$extension" in
         B=$(yes " " | head -n$perDiffWidth | tr -d '\n')
       fi
 
-      echo "$A""    ""$B"
+      echo "$A    $B"
     done
   ;;
   *)
