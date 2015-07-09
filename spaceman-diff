@@ -22,9 +22,9 @@ case "$extension" in
     outputA=`convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -`
     outputB=`convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -`
 
-    lengthA=`echo "$outputA" | wc -l | xargs`
-    lengthB=`echo "$outputB" | wc -l | xargs`
-    max=`echo "$lengthA\n$lengthB" | sort -nr | head -n1`
+    heightA=`echo "$outputA" | wc -l | xargs`
+    heightB=`echo "$outputB" | wc -l | xargs`
+    max=`echo "$heightA\n$heightB" | sort -nr | head -n1`
 
     sizeA=$(ls -lh $fileA | cut -d" " -f9)
     sizeB=$(ls -lh $fileB | cut -d" " -f9)
