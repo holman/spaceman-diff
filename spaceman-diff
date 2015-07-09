@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# spaceman-diff
+# ...because you're too busy to leave the command line, dammit.
+#
+# Enjoy.
+
+set -e
+
+filename=`basename $1`
+extension=${filename##*.}
+
+case "$extension" in
+  "jpg"|"jpeg"|"gif"|"png")
+    echo "wat"
+  ;;
+  *)
+    # Fallback to Git's own diffing
+    git diff --no-ext-diff
+  ;;
+esac
