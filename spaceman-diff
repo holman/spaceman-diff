@@ -7,6 +7,23 @@
 
 set -e
 
+help()
+{
+  cat <<EOF
+
+  USAGE:
+    spaceman-diff [-h|--help]
+
+  EXAMPLES:
+    spaceman-diff
+EOF
+}
+
+if [ "$1" = "" ] ; then
+  help
+  exit
+fi
+
 filename=`basename $1`
 extension=${filename##*.}
 
