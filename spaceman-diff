@@ -10,9 +10,27 @@ set -e
 filename=`basename $1`
 extension=${filename##*.}
 
+perDiffWidth=38
+
+fileA=$2
+fileB=$5
+
 case "$extension" in
   "jpg"|"jpeg"|"gif"|"png")
-    echo "wat"
+    outputA=`jp2a $fileA --color --width=$perDiffWidth`
+    outputB=`jp2a $fileB --color --width=$perDiffWidth`
+
+    lengthA=`echo "$outputA" | wc -l | xargs`
+    lengthB=`echo "$outputB" | wc -l | xargs`
+    max=`echo "$lengthA\n$lengthB" | sort -r | head -n1`
+
+    for (( i=1; i<=$max; i++ ))
+    do
+      A=$(echo "$outputA" | sed -n ${i}p)
+      B=$(echo "$outputB" | sed -n ${i}p)
+
+      echo "$A" + "    " + "$B"
+    done
   ;;
   *)
     # Fallback to Git's own diffing
