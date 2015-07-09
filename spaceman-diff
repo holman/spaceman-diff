@@ -10,7 +10,9 @@ set -e
 filename=`basename $1`
 extension=${filename##*.}
 
-perDiffWidth=38
+screenWidth=$(stty size | cut -d " " -f2)
+screenWidthMinusBuffer=$(expr $screenWidth - 10)
+perDiffWidth=$(expr $screenWidthMinusBuffer / 2)
 
 fileA=$2
 fileB=$5
@@ -28,6 +30,14 @@ case "$extension" in
     do
       A=$(echo "$outputA" | sed -n ${i}p)
       B=$(echo "$outputB" | sed -n ${i}p)
+
+      if [ "$A" = "" ] ; then
+        A=$(yes " " | head -n$perDiffWidth | tr -d '\n')
+      fi
+
+      if [ "$B" = "" ] ; then
+        B=$(yes " " | head -n$perDiffWidth | tr -d '\n')
+      fi
 
       echo "$A" + "    " + "$B"
     done
