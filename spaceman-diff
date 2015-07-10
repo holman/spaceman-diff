@@ -46,7 +46,7 @@ case "$extension" in
     sizeA=$(expr $(stat -f %z $fileA) / 1024)
     sizeB=$(expr $(stat -f %z $fileB) / 1024)
     headerA="OLD: $(basename $1) ($sizeA KB)"
-    headerB="NEW: $(basename $5) ($sizeB KB)$reset_color"
+    headerB="NEW: $(basename $5) ($sizeB KB)"
 
     lengthA=$(echo $headerA | wc -m | xargs)
     lengthB=$(echo $headerB | wc -m | xargs)
