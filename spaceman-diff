@@ -25,8 +25,9 @@ fi
 filename=`basename $1`
 extension=${filename##*.}
 
+sideBySideBuffer=4
 screenWidth=$(stty size | cut -d " " -f2)
-screenWidthMinusBuffer=$(expr $screenWidth - 4)
+screenWidthMinusBuffer=$(expr $screenWidth - $sideBySideBuffer)
 perDiffWidth=$(expr $screenWidthMinusBuffer / 2)
 
 fileA=$2
@@ -41,9 +42,25 @@ case "$extension" in
     heightB=`echo "$outputB" | wc -l | xargs`
     max=`echo "$heightA\n$heightB" | sort -nr | head -n1`
 
-    sizeA=$(ls -lh $fileA | cut -d" " -f9)
-    sizeB=$(ls -lh $fileB | cut -d" " -f9)
-    echo "Filesize A: $sizeA, Filesize B: $sizeB"
+    # Header row
+    sizeA=$(expr $(stat -f %z $fileA) / 1024)
+    sizeB=$(expr $(stat -f %z $fileB) / 1024)
+    headerA="OLD: $(basename $1) ($sizeA KB)"
+    headerB="NEW: $(basename $5) ($sizeB KB)$reset_color"
+
+    lengthA=$(echo $headerA | wc -m | xargs)
+    lengthB=$(echo $headerB | wc -m | xargs)
+
+    echo
+    printf "$headerA"
+    printf "$(yes " " | head -n$(expr $perDiffWidth - $lengthA + $sideBySideBuffer + 1) | tr -d '\n')"
+    printf "$headerB"
+    echo
+
+    printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
+    printf "$(yes " " | head -n$sideBySideBuffer | tr -d '\n')"
+    printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
+    echo
 
     for (( i=1; i<=$max; i++ ))
     do
@@ -66,3 +83,5 @@ case "$extension" in
     git diff --no-ext-diff $5 $1
   ;;
 esac
+
+echo
