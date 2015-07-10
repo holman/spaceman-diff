@@ -10,12 +10,10 @@ set -e
 help()
 {
   cat <<EOF
+  This should normally be called via \`git-diff(1)\`.
 
   USAGE:
-    spaceman-diff [-h|--help]
-
-  EXAMPLES:
-    spaceman-diff
+    spaceman-diff fileA shaA modeA fileB shaB modeB
 EOF
 }
 
