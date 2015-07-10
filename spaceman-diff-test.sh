@@ -1,6 +1,6 @@
 #!/usr/bin/env roundup
 
-describe "spaceman-diff: generates ascii diffs!"
+describe "spaceman-diff: generates ascii image diffs!"
 
 spaceman="./spaceman-diff"
 
