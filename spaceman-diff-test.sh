@@ -13,3 +13,9 @@ it_falls_back_for_non_image_data() {
 
   $output | grep "diff --git a/spaceman-diff b/spaceman-diff"
 }
+
+it_deals_with_deleted_images() {
+  output="$spaceman stuff"
+
+  $output | grep "flunk"
+}
