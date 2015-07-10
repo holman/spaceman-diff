@@ -65,6 +65,6 @@ case "$extension" in
   ;;
   *)
     # Fallback to Git's own diffing
-    git diff --no-ext-diff
+    git diff --no-ext-diff $5 $1
   ;;
 esac
