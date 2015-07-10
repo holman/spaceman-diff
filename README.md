@@ -26,10 +26,6 @@ If you're using [Homebrew][brew], blindly run this:
 
     brew install jp2a imagemagick
 
-[jp2a]:        https://csl.name/jp2a/
-[imagemagick]: http://www.imagemagick.org
-[brew]:        http://brew.sh
-
 ## install
 
 Once you have your dependencies installed, drop `spaceman-diff` (LINK NEEDED) onto your system or your dotfiles directory or whatever kooky stuff you're using. After that, you need to configure Git to use `spaceman-diff` for all your diffs.
@@ -48,3 +44,14 @@ Note: this is kind of a naive approach, and it probably won't work very well if 
 Alternatively, `spaceman-diff` is just a really simple and dumb shell script, so if there's anything in here that doesn't quite work for you, just make the changes in your own `spaceman-diff` file. No one will tell on you.
 
 ## contributing
+
+[Send a pull request][pull] with your changes, and make sure the tests pass. You can run dem tests with `./test` in your working directory.
+
+## cool
+
+This was cobbled together by [@holman](https://twitter.com/holman).
+
+[jp2a]:        https://csl.name/jp2a/
+[imagemagick]: http://www.imagemagick.org
+[brew]:        http://brew.sh
+[pull]:        https://github.com/holman/spaceman-diff/compare
