@@ -14,8 +14,14 @@ it_falls_back_for_non_image_data() {
   $output | grep "diff --git a/spaceman-diff b/spaceman-diff"
 }
 
-it_deals_with_deleted_images() {
-  output="$spaceman stuff"
+it_deals_with_directories() {
+  output="$spaceman test deadbeef 100644 test /dev/null 100644"
 
-  $output | grep "flunk"
+  $output | grep "no img"
+}
+
+it_deals_with_new_image() {
+  output="$spaceman an-image-tho.png deadbeef 100644 img-tho.png /dev/null 100644"
+
+  $output | grep "no img"
 }
