@@ -28,20 +28,27 @@ If you're using [Homebrew][brew], blindly run this:
 
 ## install
 
-Once you have your dependencies installed, drop `spaceman-diff` (LINK NEEDED) onto your system or your dotfiles directory or whatever kooky stuff you're using. After that, you need to configure Git to use `spaceman-diff` for all your diffs.
+Once you have your dependencies installed, drop `spaceman-diff` (LINK NEEDED) onto your system or your dotfiles directory or whatever kooky stuff you're using. Basically you need `spaceman-diff` to be available to your `$PATH`. After that, you need to configure Git to use `spaceman-diff` for all your image diffs.
 
-In your `~/.gitconfig`, you'll want to add a snippet of code so it looks like this:
+If you don't have one already, create a file at `~/config/git/attributes` and add this to it:
 
 ```txt
-[diff]
-        external = path/to/spaceman-diff
+*.png  diff=spaceman-diff
+*.jpg  diff=spaceman-diff
+*.jpeg diff=spaceman-diff
+*.gif  diff=spaceman-diff
 ```
 
-This line tells Git that you want to use `spaceman-diff` for all of your diffs. In `spaceman-diff` we make a quick check to see if the file passed to it is an image (jpg/png/gif, etc), and if not, we pass it back to Git with `git diff --no-ext-diff`. Basically, if we're supposed to be rendering an image diff we do it, otherwise we bounce it back to Git's internal diffing.
+This basically tells Git to use the `spaceman-diff` strategy to render the diff for these four particular file extensions.
 
-Note: this is kind of a naive approach, and it probably won't work very well if you *already* use an external diff tool for diffs. There's a couple other options here for you that you can look into: Git attributes to determine which filetype specifically to shoot to `spaceman-diff`, or tie it into `git difftool`. (By the way: if you run into this problem yourself, shoot over a pull request with your docs and it'd be lovely to add it to this `README` for others to use.)
+Next, you need to tell Git about spaceman-diff. Do that by editing `~/.gitconfig`:
 
-Alternatively, `spaceman-diff` is just a really simple and dumb shell script, so if there's anything in here that doesn't quite work for you, just make the changes in your own `spaceman-diff` file. No one will tell on you.
+```txt
+[diff "spaceman-diff"]
+  command = ~/Code/spaceman-diff/spaceman-diff
+```
+
+At this point, you should be ready to go. Try it out on a directory with an unstaged image change and run it with `git diff`.
 
 ## contributing
 
