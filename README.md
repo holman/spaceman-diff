@@ -45,7 +45,7 @@ Next, you need to tell Git about spaceman-diff. Do that by editing `~/.gitconfig
 
 ```txt
 [diff "spaceman-diff"]
-  command = ~/Code/spaceman-diff/spaceman-diff
+  command = spaceman-diff
 ```
 
 At this point, you should be ready to go. Try it out on a directory with an unstaged image change and run it with `git diff`.
