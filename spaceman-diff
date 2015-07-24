@@ -22,9 +22,6 @@ if [ "$1" = "" ] ; then
   exit
 fi
 
-filename=`basename $1`
-extension=${filename##*.}
-
 sideBySideBuffer=4
 screenWidth=$(stty size | cut -d " " -f2)
 screenWidthMinusBuffer=$(expr $screenWidth - $sideBySideBuffer)
@@ -33,55 +30,52 @@ perDiffWidth=$(expr $screenWidthMinusBuffer / 2)
 fileA=$2
 fileB=$5
 
-case "$extension" in
-  "jpg"|"jpeg"|"gif"|"png")
-    outputA=`convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -`
-    outputB=`convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -`
+filenameA=`basename $1`
+extA=${filenameA##*.}
+filenameB=`basename $5`
+extB=${filenameB##*.}
 
-    heightA=`echo "$outputA" | wc -l | xargs`
-    heightB=`echo "$outputB" | wc -l | xargs`
-    max=`echo "$heightA\n$heightB" | sort -nr | head -n1`
+# Header row
+sizeA=$(expr $(stat -f %z $fileA) / 1024)
+sizeB=$(expr $(stat -f %z $fileB) / 1024)
+headerA="OLD: $(basename $1) ($sizeA KB)"
+headerB="NEW: $(basename $5) ($sizeB KB)"
 
-    # Header row
-    sizeA=$(expr $(stat -f %z $fileA) / 1024)
-    sizeB=$(expr $(stat -f %z $fileB) / 1024)
-    headerA="OLD: $(basename $1) ($sizeA KB)"
-    headerB="NEW: $(basename $5) ($sizeB KB)"
+lengthA=$(echo $headerA | wc -m | xargs)
+lengthB=$(echo $headerB | wc -m | xargs)
 
-    lengthA=$(echo $headerA | wc -m | xargs)
-    lengthB=$(echo $headerB | wc -m | xargs)
+echo
+printf "$headerA"
+printf "$(yes " " | head -n$(expr $perDiffWidth - $lengthA + $sideBySideBuffer + 1) | tr -d '\n')"
+printf "$headerB"
+echo
 
-    echo
-    printf "$headerA"
-    printf "$(yes " " | head -n$(expr $perDiffWidth - $lengthA + $sideBySideBuffer + 1) | tr -d '\n')"
-    printf "$headerB"
-    echo
+printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
+printf "$(yes " " | head -n$sideBySideBuffer | tr -d '\n')"
+printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
+echo
 
-    printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
-    printf "$(yes " " | head -n$sideBySideBuffer | tr -d '\n')"
-    printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
-    echo
+outputA=`convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -`
+outputB=`convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -`
 
-    for (( i=1; i<=$max; i++ ))
-    do
-      A=$(echo "$outputA" | sed -n ${i}p)
-      B=$(echo "$outputB" | sed -n ${i}p)
+heightA=`echo "$outputA" | wc -l | xargs`
+heightB=`echo "$outputB" | wc -l | xargs`
+max=`echo "$heightA\n$heightB" | sort -nr | head -n1`
 
-      if [ "$A" = "" ] ; then
-        A=$(yes " " | head -n$perDiffWidth | tr -d '\n')
-      fi
+for (( i=1; i<=$max; i++ ))
+do
+  A=$(echo "$outputA" | sed -n ${i}p)
+  B=$(echo "$outputB" | sed -n ${i}p)
 
-      if [ "$B" = "" ] ; then
-        B=$(yes " " | head -n$perDiffWidth | tr -d '\n')
-      fi
+  if [ "$A" = "" ] ; then
+    A=$(yes " " | head -n$perDiffWidth | tr -d '\n')
+  fi
 
-      echo "$A    $B"
-    done
-  ;;
-  *)
-    # Fallback to Git's own diffing
-    git diff --no-ext-diff $5 $1
-  ;;
-esac
+  if [ "$B" = "" ] ; then
+    B=$(yes " " | head -n$perDiffWidth | tr -d '\n')
+  fi
+
+  echo "$A    $B"
+done
 
 echo
