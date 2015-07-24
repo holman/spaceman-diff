@@ -52,7 +52,7 @@ At this point, you should be ready to go. Try it out on a directory with an unst
 
 ## contributing
 
-[Send a pull request][pull] with your changes, and make sure the tests pass. You can run dem tests with `./test` in your working directory.
+[Send a pull request][pull] with your changes, and make sure the tests pass. You can run dem tests with `./tests` in your working directory.
 
 ## cool
 
