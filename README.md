@@ -16,6 +16,8 @@ Here's a quick example of what you might see:
 
 The goal is that `spaceman-diff` gives you a quick way of verifying that yes, the image you're committing is the image you want to commit, and yes, the image you're committing isn't accidentally 20 terabytes in size or something foolish like that.
 
+Note: right now, spaceman-diff requires a *change* in the image; you won't see a diff rendered if you're simply adding or removing a file to your repo. `git diff` apparently doesn't pass things through to spaceman-diff at all in this case. There's probably a way to handle this, so pull requests accepted.
+
 ## dependencies
 
 There are two dependencies that you need before you can fiddle with pixels and characters and junk: [jp2a][jp2a] and [ImageMagick][imagemagick]. `jp2a` handles conversion of a JPEG to ASCII, and ImageMagick can do everything from image conversion to probably running a nuclear reactor.
