@@ -28,7 +28,7 @@ If you're using [Homebrew][brew], blindly run this:
 
 ## install
 
-Once you have your dependencies installed, drop `spaceman-diff` (LINK NEEDED) onto your system or your dotfiles directory or whatever kooky stuff you're using. Basically you need `spaceman-diff` to be available to your `$PATH`. After that, you need to configure Git to use `spaceman-diff` for all your image diffs.
+Once you have your dependencies installed, drop `spaceman-diff` (LINK NEEDED) onto your system or your dotfiles directory or whatever kooky stuff you're using. After that, you need to configure Git to use `spaceman-diff` for all your image diffs.
 
 If you don't have one already, create a file at `~/config/git/attributes` and add this to it:
 
@@ -45,7 +45,7 @@ Next, you need to tell Git about spaceman-diff. Do that by editing `~/.gitconfig
 
 ```txt
 [diff "spaceman-diff"]
-  command = spaceman-diff
+  command = /path/to/spaceman-diff
 ```
 
 At this point, you should be ready to go. Try it out on a directory with an unstaged image change and run it with `git diff`.
