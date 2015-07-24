@@ -12,9 +12,9 @@ Important business programmers don't have time to switch away from their termina
 
 Here's a quick example of what you might see:
 
-~SCREENSHOT~
+<img width="1440" alt="diff" src="https://cloud.githubusercontent.com/assets/2723/8864988/3efdaaf8-315d-11e5-9e39-14128d22c69b.png">
 
-The goal is that `spaceman-diff` gives you a quick way of verifying that yes, the image you're committing is the image you want to commit, and yes, the image you're committing isn't 20 terabytes in size or something foolish like that.
+The goal is that `spaceman-diff` gives you a quick way of verifying that yes, the image you're committing is the image you want to commit, and yes, the image you're committing isn't 20 terabytes in size or something foolish like that: we show a quick filesize next to the filename.
 
 ## dependencies
 
