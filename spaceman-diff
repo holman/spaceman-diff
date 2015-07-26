@@ -36,8 +36,8 @@ filenameB=`basename $5`
 extB=${filenameB##*.}
 
 # Header row
-sizeA=$(expr $(stat -c %s $fileA) / 1024)
-sizeB=$(expr $(stat -c %s $fileB) / 1024)
+sizeA=$(expr $(ls -l $fileA | awk '{print $5}') / 1024)
+sizeB=$(expr $(ls -l $fileB | awk '{print $5}') / 1024)
 headerA="OLD: $(basename $1) ($sizeA KB)"
 headerB="NEW: $(basename $5) ($sizeB KB)"
 
