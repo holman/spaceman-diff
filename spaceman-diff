@@ -36,8 +36,8 @@ filenameB=`basename $5`
 extB=${filenameB##*.}
 
 # Header row
-sizeA=$(expr $(stat -f %z $fileA) / 1024)
-sizeB=$(expr $(stat -f %z $fileB) / 1024)
+sizeA=$(expr $(stat -c %s $fileA) / 1024)
+sizeB=$(expr $(stat -c %s $fileB) / 1024)
 headerA="OLD: $(basename $1) ($sizeA KB)"
 headerB="NEW: $(basename $5) ($sizeB KB)"
 
@@ -62,7 +62,7 @@ heightA=`echo "$outputA" | wc -l | xargs`
 heightB=`echo "$outputB" | wc -l | xargs`
 max=`echo "$heightA\n$heightB" | sort -nr | head -n1`
 
-for (( i=1; i<=$max; i++ ))
+for i in `seq 1 $max`
 do
   A=$(echo "$outputA" | sed -n ${i}p)
   B=$(echo "$outputB" | sed -n ${i}p)
