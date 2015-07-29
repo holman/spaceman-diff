@@ -30,9 +30,9 @@ perDiffWidth=$(expr $screenWidthMinusBuffer / 2)
 fileA=$2
 fileB=$5
 
-filenameA=`basename $1`
+filenameA=$(basename $1)
 extA=${filenameA##*.}
-filenameB=`basename $5`
+filenameB=$(basename $5)
 extB=${filenameB##*.}
 
 # Header row
@@ -55,14 +55,14 @@ printf "$(yes " " | head -n$sideBySideBuffer | tr -d '\n')"
 printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
 echo
 
-outputA=`convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -`
-outputB=`convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -`
+outputA=$(convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -)
+outputB=$(convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -)
 
-heightA=`echo "$outputA" | wc -l | xargs`
-heightB=`echo "$outputB" | wc -l | xargs`
-max=`echo "$heightA\n$heightB" | sort -nr | head -n1`
+heightA=$(echo "$outputA" | wc -l | xargs)
+heightB=$(echo "$outputB" | wc -l | xargs)
+max=$(echo "$heightA\n$heightB" | sort -nr | head -n1)
 
-for i in `seq 1 $max`
+for i in $(seq 1 $max)
 do
   A=$(echo "$outputA" | sed -n ${i}p)
   B=$(echo "$outputB" | sed -n ${i}p)
