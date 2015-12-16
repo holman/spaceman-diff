@@ -36,8 +36,18 @@ filenameB=$(basename $5)
 extB=${filenameB##*.}
 
 # Header row
-sizeA=$(expr $(ls -l $fileA | awk '{print $5}') / 1024)
-sizeB=$(expr $(ls -l $fileB | awk '{print $5}') / 1024)
+if [ -f $fileA ] ; then
+  sizeA=$(expr $(ls -l $fileA | awk '{print $5}') / 1024)
+else
+  sizeA=0
+fi
+
+if [ -f $fileB ] ; then
+  sizeB=$(expr $(ls -l $fileB | awk '{print $5}') / 1024)
+else
+  sizeB=0
+fi
+
 headerA="OLD: $(basename $1) ($sizeA KB)"
 headerB="NEW: $(basename $5) ($sizeB KB)"
 
@@ -55,8 +65,13 @@ printf "$(yes " " | head -n$sideBySideBuffer | tr -d '\n')"
 printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
 echo
 
-outputA=$(convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -)
-outputB=$(convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -)
+if [ -f $fileA ] ; then
+  outputA=$(convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -)
+fi
+
+if [ -f $fileB ] ; then
+  outputB=$(convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -)
+fi
 
 heightA=$(echo "$outputA" | wc -l | xargs)
 heightB=$(echo "$outputB" | wc -l | xargs)
