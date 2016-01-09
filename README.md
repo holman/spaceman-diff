@@ -30,7 +30,7 @@ If you're using [Homebrew][brew], blindly run this:
 
 ## install
 
-Once you have your dependencies installed, drop [`spaceman-diff`][binary] onto your system or your dotfiles directory or whatever kooky stuff you're using. After that, you need to configure Git to use `spaceman-diff` for all your image diffs.
+Once you have your dependencies installed, drop [`spaceman-diff`][binary] onto your system or your dotfiles directory or whatever kooky stuff you're using. If you're using [Homebrew](http://brew.sh), you can instead install `spaceman-diff` with `brew install spaceman-diff`. After that, you need to configure Git to use `spaceman-diff` for all your image diffs.
 
 If you don't have one already, create a file at `~/.config/git/attributes` and add this to it:
 
