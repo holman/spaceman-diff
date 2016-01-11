@@ -16,3 +16,29 @@ it_renders_diff() {
   $output | grep "NEW:"
   $output | grep "(9 KB)"
 }
+
+it_works_with_output_filenames_containing_spaces() {
+  output_file=$(mktemp /tmp/XXXXX)
+
+  $spaceman "test/images/flag.png" \
+    "test/images/flag.png" a190ba 100644 \
+    "test/images/with spaces.png" 000000 100644 > "$output_file"
+
+  grep -F 'OLD: flag.png (84 KB)' < "$output_file"
+  grep -F 'NEW: with spaces.png (9 KB)' < "$output_file"
+
+  rm "$output_file"
+}
+
+it_works_with_input_filenames_containing_spaces() {
+  output_file=$(mktemp /tmp/XXXXX)
+
+  $spaceman "test/images/with spaces.png" \
+    "test/images/with spaces.png" a190ba 100644 \
+    "test/images/flag.png" 000000 100644 > "$output_file"
+
+  grep -F 'OLD: with spaces.png (9 KB)' < "$output_file"
+  grep -F 'NEW: flag.png (84 KB)' < "$output_file"
+
+  rm "$output_file"
+}
