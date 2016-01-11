@@ -37,13 +37,17 @@ extB=${filenameB##*.}
 
 # Header row
 if [ -f "$fileA" ] ; then
+  set +e
   sizeA=$(expr $(ls -l "$fileA" | awk '{print $5}') / 1024)
+  set -e
 else
   sizeA=0
 fi
 
 if [ -f "$fileB" ] ; then
+  set +e
   sizeB=$(expr $(ls -l "$fileB" | awk '{print $5}') / 1024)
+  set -e
 else
   sizeB=0
 fi

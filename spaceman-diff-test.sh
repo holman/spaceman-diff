@@ -49,3 +49,15 @@ it_works_with_input_filenames_containing_spaces() {
 
   rm "$output_file"
 }
+
+it_works_with_small_files() {
+  output_file=$(run_spaceman \
+    "test/images/gooder-flag.png" \
+    "test/images/gooder-flag.png" a190ba 100644 \
+    "test/images/small-image.png" 000000 100644)
+
+  grep -F 'OLD: gooder-flag.png (9 KB)' < "$output_file"
+  grep -F 'NEW: small-image.png (0 KB)' < "$output_file"
+
+  rm "$output_file"
+}
