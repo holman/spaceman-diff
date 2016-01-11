@@ -30,26 +30,30 @@ perDiffWidth=$(expr $screenWidthMinusBuffer / 2)
 fileA=$2
 fileB=$5
 
-filenameA=$(basename $1)
+filenameA=$(basename "$1")
 extA=${filenameA##*.}
-filenameB=$(basename $5)
+filenameB=$(basename "$5")
 extB=${filenameB##*.}
 
 # Header row
-if [ -f $fileA ] ; then
-  sizeA=$(expr $(ls -l $fileA | awk '{print $5}') / 1024)
+if [ -f "$fileA" ] ; then
+  set +e
+  sizeA=$(expr $(ls -l "$fileA" | awk '{print $5}') / 1024)
+  set -e
 else
   sizeA=0
 fi
 
-if [ -f $fileB ] ; then
-  sizeB=$(expr $(ls -l $fileB | awk '{print $5}') / 1024)
+if [ -f "$fileB" ] ; then
+  set +e
+  sizeB=$(expr $(ls -l "$fileB" | awk '{print $5}') / 1024)
+  set -e
 else
   sizeB=0
 fi
 
-headerA="OLD: $(basename $1) ($sizeA KB)"
-headerB="NEW: $(basename $5) ($sizeB KB)"
+headerA="OLD: $(basename "$1") ($sizeA KB)"
+headerB="NEW: $(basename "$5") ($sizeB KB)"
 
 lengthA=$(echo $headerA | wc -m | xargs)
 lengthB=$(echo $headerB | wc -m | xargs)
@@ -65,12 +69,12 @@ printf "$(yes " " | head -n$sideBySideBuffer | tr -d '\n')"
 printf "$(yes "—" | head -n$perDiffWidth | tr -d '\n')"
 echo
 
-if [ -f $fileA ] ; then
-  outputA=$(convert $fileA jpg:- | jp2a --color --width=$perDiffWidth -)
+if [ -f "$fileA" ] ; then
+  outputA=$(convert "$fileA" jpg:- | jp2a --color --width=$perDiffWidth -)
 fi
 
-if [ -f $fileB ] ; then
-  outputB=$(convert $fileB jpg:- | jp2a --color --width=$perDiffWidth -)
+if [ -f "$fileB" ] ; then
+  outputB=$(convert "$fileB" jpg:- | jp2a --color --width=$perDiffWidth -)
 fi
 
 heightA=$(echo "$outputA" | wc -l | xargs)
