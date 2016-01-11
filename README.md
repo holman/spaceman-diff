@@ -28,6 +28,12 @@ If you're using [Homebrew][brew], blindly run this:
 
     brew install jp2a imagemagick
 
+### linux
+
+If you're using `apt`, you should be able to install your dependencies in a similar manner:
+
+    sudo apt-get install jp2a imagemagick
+
 ## install
 
 Once you have your dependencies installed, drop [`spaceman-diff`][binary] onto your system or your dotfiles directory or whatever kooky stuff you're using. If you're using [Homebrew](http://brew.sh), you can instead install `spaceman-diff` with `brew install spaceman-diff`. After that, you need to configure Git to use `spaceman-diff` for all your image diffs.
