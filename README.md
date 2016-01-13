@@ -70,4 +70,4 @@ This was cobbled together by [@holman](https://twitter.com/holman).
 [imagemagick]: http://www.imagemagick.org
 [brew]:        http://brew.sh
 [binary]:      https://github.com/holman/spaceman-diff/blob/master/spaceman-diff
-[pull]:        https://github.com/holman/spaceman-diff/compare
+[pull]:        https://github.com/holman/spaceman-diff/pull/new/master
