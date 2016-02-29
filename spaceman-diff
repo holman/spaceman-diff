@@ -30,11 +30,6 @@ perDiffWidth=$(expr $screenWidthMinusBuffer / 2)
 fileA=$2
 fileB=$5
 
-filenameA=$(basename "$1")
-extA=${filenameA##*.}
-filenameB=$(basename "$5")
-extB=${filenameB##*.}
-
 # Header row
 if [ -f "$fileA" ] ; then
   set +e
