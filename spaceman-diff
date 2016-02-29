@@ -52,8 +52,8 @@ else
   sizeB=0
 fi
 
-headerA="OLD: $(basename "$1") ($sizeA KB)"
-headerB="NEW: $(basename "$5") ($sizeB KB)"
+headerA="OLD: $1 ($sizeA KB)"
+headerB="NEW: $5 ($sizeB KB)"
 
 lengthA=$(echo $headerA | wc -m | xargs)
 lengthB=$(echo $headerB | wc -m | xargs)
