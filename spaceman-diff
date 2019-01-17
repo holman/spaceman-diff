@@ -34,21 +34,25 @@ fileB=$5
 if [ -f "$fileA" ] ; then
   set +e
   sizeA=$(expr $(ls -l "$fileA" | awk '{print $5}') / 1024)
+  geoA=$(identify -ping -format '%wx%h' "$fileA")
   set -e
 else
   sizeA=0
+  geoA="0x0"
 fi
 
 if [ -f "$fileB" ] ; then
   set +e
   sizeB=$(expr $(ls -l "$fileB" | awk '{print $5}') / 1024)
+  geoB=$(identify -ping -format '%wx%h' "$fileB")
   set -e
 else
   sizeB=0
+  geoB="0x0"
 fi
 
-headerA="OLD: $1 ($sizeA KB)"
-headerB="NEW: $5 ($sizeB KB)"
+headerA="OLD: $1 (${geoA} px @ $sizeA KB)"
+headerB="NEW: $5 (${geoB} px @ $sizeB KB)"
 
 lengthA=$(echo $headerA | wc -m | xargs)
 lengthB=$(echo $headerB | wc -m | xargs)
