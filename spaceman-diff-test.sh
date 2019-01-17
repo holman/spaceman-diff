@@ -20,8 +20,8 @@ it_renders_diff() {
     test/images/flag.png a190ba 100644 \
     test/images/gooder-flag.png 000000 100644)
 
-  grep -F "OLD: test/images/flag.png (84 KB)" < "$output_file"
-  grep -F "NEW: test/images/gooder-flag.png (9 KB)" < "$output_file"
+  grep -F "OLD: test/images/flag.png (2000x1263 px @ 84 KB)" < "$output_file"
+  grep -F "NEW: test/images/gooder-flag.png (2000x1236 px @ 9 KB)" < "$output_file"
 
   rm "$output_file"
 }
@@ -32,8 +32,8 @@ it_works_with_output_filenames_containing_spaces() {
     "test/images/flag.png" a190ba 100644 \
     "test/images/with spaces.png" 000000 100644)
 
-  grep -F 'OLD: test/images/flag.png (84 KB)' < "$output_file"
-  grep -F 'NEW: test/images/with spaces.png (9 KB)' < "$output_file"
+  grep -F 'OLD: test/images/flag.png (2000x1263 px @ 84 KB)' < "$output_file"
+  grep -F 'NEW: test/images/with spaces.png (2000x1236 px @ 9 KB)' < "$output_file"
 
   rm "$output_file"
 }
@@ -44,8 +44,8 @@ it_works_with_input_filenames_containing_spaces() {
     "test/images/with spaces.png" a190ba 100644 \
     "test/images/flag.png" 000000 100644)
 
-  grep -F 'OLD: test/images/with spaces.png (9 KB)' < "$output_file"
-  grep -F 'NEW: test/images/flag.png (84 KB)' < "$output_file"
+  grep -F 'OLD: test/images/with spaces.png (2000x1236 px @ 9 KB)' < "$output_file"
+  grep -F 'NEW: test/images/flag.png (2000x1263 px @ 84 KB)' < "$output_file"
 
   rm "$output_file"
 }
@@ -56,8 +56,8 @@ it_works_with_small_files() {
     "test/images/gooder-flag.png" a190ba 100644 \
     "test/images/small-image.png" 000000 100644)
 
-  grep -F 'OLD: test/images/gooder-flag.png (9 KB)' < "$output_file"
-  grep -F 'NEW: test/images/small-image.png (0 KB)' < "$output_file"
+  grep -F 'OLD: test/images/gooder-flag.png (2000x1236 px @ 9 KB)' < "$output_file"
+  grep -F 'NEW: test/images/small-image.png (36x38 px @ 0 KB)' < "$output_file"
 
   rm "$output_file"
 }
